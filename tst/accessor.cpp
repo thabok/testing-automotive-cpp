@@ -14,17 +14,17 @@ namespace BTC {
 		InfotainmentSystem sut;
 
 		// public object attributes
-		float userVolumeRequest;
-		float effectiveVolume;
-		float volumeThreshold;
+		Volume userVolumeRequest;
+		Volume effectiveVolume;
+		Volume volumeThreshold;
 		bool tooLoud;
 		bool isNavigationActive;
 		bool stopRequested;
-		float currentRouteLength;
-		float requestedRouteLength;
+		DistanceKM currentRouteLength;
+		DistanceKM requestedRouteLength;
 		bool isBluetoothConnected;
-		int connectedDeviceId;
-		int connectionRequestId;
+		Identifier connectedDeviceId;
+		Identifier connectionRequestId;
 
 		void stepFunction() {
 			// Input interface

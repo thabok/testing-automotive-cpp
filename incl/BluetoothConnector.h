@@ -1,13 +1,14 @@
 #ifndef BLUETOOTH_CONNECTOR_H
 #define BLUETOOTH_CONNECTOR_H
 
+typedef int Identifier;
 #define NO_DEVICE_ID -1
 
 class BluetoothConnector {
 public:
     bool isBluetoothConnected;
-    int connectedDeviceId;
-    int connectionRequestId;
+    Identifier connectedDeviceId;
+    Identifier connectionRequestId;
 
     BluetoothConnector();
     void connectDevice();

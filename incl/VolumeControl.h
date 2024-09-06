@@ -1,11 +1,13 @@
 #ifndef VOLUME_CONTROL_H
 #define VOLUME_CONTROL_H
 
+typedef float Volume;
+
 class VolumeControl {
 public:
-    float userVolumeRequest;
-    float effectiveVolume;
-    float volumeThreshold;
+    Volume userVolumeRequest;
+    Volume effectiveVolume;
+    Volume volumeThreshold;
     bool tooLoud;
 
     VolumeControl();

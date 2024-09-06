@@ -1,6 +1,6 @@
 #include "SystemStateReporter.h"
 
-unsigned char systemStateBitfield = 0b00; // binary: 00
+Bitfield systemStateBitfield = 0b00; // binary: 00
 
 void updateSystemState(SystemState state) {
     switch (state) {

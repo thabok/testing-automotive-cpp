@@ -1,7 +1,7 @@
 #ifndef SYSTEM_STATE_REPORTER_H
 #define SYSTEM_STATE_REPORTER_H
 
-extern unsigned char systemStateBitfield;
+typedef unsigned char Bitfield;
 
 typedef enum {
     NAVIGATION_OFF,
@@ -9,6 +9,8 @@ typedef enum {
     BLUETOOTH_OFF,
     BLUETOOTH_ON
 } SystemState;
+
+extern Bitfield systemStateBitfield;
 
 void updateSystemState(SystemState state);
 
