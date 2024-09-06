@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeModel>
 	<Files>
-		<File id="ID58" name="BluetoothConnector.cpp" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\src" relPath=".\..\src" annotate="yes" kind="source" />
-		<File id="ID63" name="InfotainmentSystem.cpp" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\src" relPath=".\..\src" annotate="yes" kind="source" />
-		<File id="ID65" name="NavigationSystem.cpp" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\src" relPath=".\..\src" annotate="yes" kind="source" />
-		<File id="ID67" name="VolumeControl.cpp" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\src" relPath=".\..\src" annotate="yes" kind="source" />
-		<File id="ID76" name="SystemStateReporter.c" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\src" relPath=".\..\src" annotate="yes" kind="source" />
-		<File id="ID1048" name="accessor.cpp" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\tst" relPath="." annotate="no" kind="source" />
+		<File id="ID63" name="BluetoothConnector.cpp" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\src" relPath=".\..\src" annotate="yes" kind="source" />
+		<File id="ID66" name="InfotainmentSystem.cpp" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\src" relPath=".\..\src" annotate="yes" kind="source" />
+		<File id="ID68" name="NavigationSystem.cpp" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\src" relPath=".\..\src" annotate="yes" kind="source" />
+		<File id="ID70" name="VolumeControl.cpp" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\src" relPath=".\..\src" annotate="yes" kind="source" />
+		<File id="ID72" name="SystemStateReporter.c" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\src" relPath=".\..\src" annotate="yes" kind="source" />
+		<File id="ID74" name="accessor.cpp" path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\tst" relPath="." annotate="no" kind="source" />
 	</Files>
 	<IncludePaths>
 		<IncludePath path="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\incl" relPath=".\..\incl" />
 	</IncludePaths>
 	<Functions>
-		<Function name="updateSystemState" sampleTime="1.0" fileref="ID76">
+		<Function name="updateSystemState" sampleTime="1.0" fileref="ID72">
 			<Args />
 			<Interface>
 				<InterfaceObj kind="in" var="state" />
-				<InterfaceObj kind="out" var="systemStateBitfield" fileref="ID76" scaling="ID330" max="3.0" />
+				<InterfaceObj kind="out" var="systemStateBitfield" fileref="ID72" scaling="ID692" max="3.0" />
 			</Interface>
 		</Function>
-		<Function name="stepFunction" sampleTime="0.01" fileref="ID1048">
+		<Function name="stepFunction" sampleTime="1.0" fileref="ID74">
 			<Args />
 			<Interface>
-				<InterfaceObj kind="out" var="systemStateBitfield" fileref="ID76" scaling="ID330" min="0.0" max="255.0" initVal="0.0" />
-				<InterfaceObj kind="in" var="userVolumeRequest" fileref="ID1048" min="0.0" max="100.0" initVal="0.0" />
-				<InterfaceObj kind="out" var="effectiveVolume" fileref="ID1048" min="0.0" max="100.0" initVal="0.0" />
-				<InterfaceObj kind="cal" var="volumeThreshold" fileref="ID1048" min="0.0" max="100.0" initVal="75.0" />
-				<InterfaceObj kind="out" var="tooLoud" fileref="ID1048" min="0.0" max="1.0" initVal="0.0" />
-				<InterfaceObj kind="out" var="isNavigationActive" fileref="ID1048" min="0.0" max="1.0" initVal="0.0" />
-				<InterfaceObj kind="out" var="currentRouteLength" fileref="ID1048" min="-3.4028234663852886E38" max="3.4028234663852886E38" initVal="0.0" />
-				<InterfaceObj kind="in" var="requestedRouteLength" fileref="ID1048" min="-3.4028234663852886E38" max="3.4028234663852886E38" initVal="0.0" />
-				<InterfaceObj kind="out" var="isBluetoothConnected" fileref="ID1048" min="0.0" max="1.0" initVal="0.0" />
-				<InterfaceObj kind="out" var="connectedDeviceId" fileref="ID1048" scaling="ID330" min="-2.147483648E9" max="2.147483647E9" initVal="0.0" />
-				<InterfaceObj kind="in" var="connectionRequestId" fileref="ID1048" scaling="ID330" min="-2.147483648E9" max="2.147483647E9" initVal="0.0" />
+				<InterfaceObj kind="out" var="systemStateBitfield" fileref="ID72" scaling="ID692" min="0.0" max="3.0" initVal="0.0" />
+				<InterfaceObj kind="in" var="userVolumeRequest" fileref="ID74" initVal="0.0" />
+				<InterfaceObj kind="out" var="effectiveVolume" fileref="ID74" initVal="0.0" />
+				<InterfaceObj kind="cal" var="volumeThreshold" fileref="ID74" initVal="0.0" />
+				<InterfaceObj kind="out" var="tooLoud" fileref="ID74" min="0.0" max="1.0" initVal="0.0" />
+				<InterfaceObj kind="out" var="isNavigationActive" fileref="ID74" min="0.0" max="1.0" initVal="0.0" />
+				<InterfaceObj kind="in" var="stopRequested" fileref="ID74" min="0.0" max="1.0" initVal="0.0" />
+				<InterfaceObj kind="out" var="currentRouteLength" fileref="ID74" min="-3.4028234663852886E38" max="3.4028234663852886E38" initVal="0.0" />
+				<InterfaceObj kind="in" var="requestedRouteLength" fileref="ID74" min="-3.4028234663852886E38" max="3.4028234663852886E38" initVal="0.0" />
+				<InterfaceObj kind="out" var="isBluetoothConnected" fileref="ID74" min="0.0" max="1.0" initVal="0.0" />
+				<InterfaceObj kind="out" var="connectedDeviceId" fileref="ID74" scaling="ID692" min="-2.147483648E9" max="2.147483647E9" initVal="0.0" />
+				<InterfaceObj kind="in" var="connectionRequestId" fileref="ID74" scaling="ID692" min="-2.147483648E9" max="2.147483647E9" initVal="0.0" />
 			</Interface>
 		</Function>
 	</Functions>
 	<Scalings>
-		<Scaling id="ID330" lsb="1.0" offset="0.0" />
+		<Scaling id="ID692" lsb="1.0" offset="0.0" />
 	</Scalings>
+	<ConstantDefines>
+		<ConstantDefine name="NO_DEVICE_ID" file="E:\home\WindowsFolders\My Documents\GitHub\thabok\testing-automotive-cpp\incl\BluetoothConnector.h" relPath=".\..\incl\BluetoothConnector.h" />
+	</ConstantDefines>
 </CodeModel>

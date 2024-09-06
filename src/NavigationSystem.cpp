@@ -1,6 +1,6 @@
 #include "NavigationSystem.h"
 
-NavigationSystem::NavigationSystem() : isNavigationActive(false), requestedRouteLength(0), currentRouteLength(0) {}
+NavigationSystem::NavigationSystem() : isNavigationActive(false), stopRequested(false), requestedRouteLength(0), currentRouteLength(0) {}
 
 void NavigationSystem::startNavigation() {
     if (requestedRouteLength > 0) {

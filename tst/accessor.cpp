@@ -19,6 +19,7 @@ namespace BTC {
 		float volumeThreshold;
 		bool tooLoud;
 		bool isNavigationActive;
+		bool stopRequested;
 		float currentRouteLength;
 		float requestedRouteLength;
 		bool isBluetoothConnected;
@@ -29,6 +30,7 @@ namespace BTC {
 			// Input interface
 			sut.userVolumeRequest = userVolumeRequest;
 			sut.volumeThreshold = volumeThreshold;
+			sut.stopRequested = stopRequested;
 			sut.requestedRouteLength = requestedRouteLength;
 			sut.connectionRequestId = connectionRequestId;
 

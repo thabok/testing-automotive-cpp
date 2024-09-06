@@ -6,6 +6,7 @@
 #include "BluetoothConnector.h"
 #include "SystemStateReporter.h"  // C header
 
+
 class InfotainmentSystem : public VolumeControl, public NavigationSystem, public BluetoothConnector {
 public:
     InfotainmentSystem();

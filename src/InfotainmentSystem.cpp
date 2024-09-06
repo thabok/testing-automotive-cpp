@@ -9,26 +9,30 @@ void InfotainmentSystem::stepFunction() {
     // Activate Navigation
     NavigationSystem::startNavigation();
 
-    // Panicking driver mode: if music is too loud -> stop navigation
-    if (VolumeControl::tooLoud) {
+    // Driver pamic mode: if music is too loud -> stop navigation
+    if (VolumeControl::tooLoud || NavigationSystem::stopRequested) {
         NavigationSystem::stopNavigation();
         updateSystemState(NAVIGATION_OFF); // adapt system status
     }
 
-    // connect bluetooth device if connection is pending
     if (BluetoothConnector::connectionRequestActive()) {
+        // connect bluetooth device if connection is pending and no connection is active
+        if (!BluetoothConnector::isBluetoothConnected) {
+            BluetoothConnector::connectDevice();
+        }
         // if (VolumeControl::tooLoud) {
         //     VolumeControl::saturateVolume();
         // }
-        BluetoothConnector::connectDevice();
+    } else if (BluetoothConnector::isBluetoothConnected) {
+        // disconnect bluetooth device if no connection is pending and a connection is active
+        BluetoothConnector::disconnectDevice();
     }
 
     // adapt system status
     if (BluetoothConnector::isBluetoothConnected) {
         updateSystemState(BLUETOOTH_ON);
     }
-
     if (NavigationSystem::isNavigationActive) {
-        updateSystemState(NAVIGATION_ON); // adapt system status
+        updateSystemState(NAVIGATION_ON);
     }
 }

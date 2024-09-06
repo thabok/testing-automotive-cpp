@@ -4,6 +4,7 @@
 class NavigationSystem {
 public:
     bool isNavigationActive;
+    bool stopRequested;
     float currentRouteLength;
     float requestedRouteLength;
 
