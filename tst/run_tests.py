@@ -1,6 +1,8 @@
 import os
 import sys
+from datetime import datetime
 
+import junit_testresults
 from btc_embedded import EPRestApi, util
 
 work_dir = os.path.dirname(sys.argv[0])
@@ -23,7 +25,12 @@ rbt_exec_payload = {
         'execConfigNames' : [ 'SIL' ]
     }
 }
+exec_start_time = datetime.now()
 response = ep.post('scopes/test-execution-rbt', rbt_exec_payload, message="Running requirements-based tests")
+test_cases = ep.get('test-cases-rbt')
+exec_end_time = datetime.now()
+junit_testresults.dump_testresults(os.path.join(work_dir, 'test-results.json'), response, exec_start_time, exec_end_time, test_cases)
+
 rbt_coverage = rbt_coverage = ep.get(f"scopes/{toplevel_scope_uid}/coverage-results-rbt")
 util.print_rbt_results(response, rbt_coverage)
 
