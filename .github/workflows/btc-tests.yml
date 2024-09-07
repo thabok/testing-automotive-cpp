@@ -1,9 +1,15 @@
 name: Run tests with BTC EmbeddedPlatform
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
 
 jobs:
   btc-tests:
@@ -11,9 +17,18 @@ jobs:
     if: ${{ contains(github.event.head_commit.message, '#ci') }}
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout files
+      uses: actions/checkout@v3
 
     - name: Run tests
       shell: powershell
       run: |
         python tst/run_tests.py
+
+    - name: Publish results
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: BTC Tests
+        path: tst/test-results.json
+        reporter: mocha-json
