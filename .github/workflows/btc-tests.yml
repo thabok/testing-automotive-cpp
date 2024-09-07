@@ -1,0 +1,19 @@
+name: Run tests with BTC EmbeddedPlatform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  btc-tests:
+    runs-on: self-hosted
+    if: ${{ contains(github.event.head_commit.message, '#ci') }}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Run tests
+      shell: powershell
+      run: |
+        python tst/run_tests.py
