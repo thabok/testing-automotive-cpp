@@ -32,3 +32,7 @@ jobs:
         name: BTC Tests
         path: tst/test-results.json
         reporter: mocha-json
+        only-summary: 'false'
+        use-actions-summary: 'true'
+        # Set action as failed if test report contains any failed test
+        fail-on-error: 'false'
