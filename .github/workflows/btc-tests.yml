@@ -1,4 +1,4 @@
-name: Run tests with BTC EmbeddedPlatform
+name: BTC Tests
 
 on:
   workflow_dispatch:
@@ -13,12 +13,13 @@ permissions:
 
 jobs:
   btc-tests:
+    name: Test execution
     runs-on: self-hosted
     if: ${{ contains(github.event.head_commit.message, '#ci') || github.event_name == 'workflow_dispatch' }}
 
     steps:
     - name: Checkout files
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Run tests
       shell: powershell
@@ -26,7 +27,7 @@ jobs:
         python tst/run_tests.py
 
     - name: Publish test results to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: reports
