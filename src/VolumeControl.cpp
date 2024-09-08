@@ -10,6 +10,8 @@ void VolumeControl::setVolume() {
 }
 
 // void VolumeControl::saturateVolume() {
-//     userVolumeRequest = volumeThreshold;
-//     setVolume();
+//     if (userVolumeRequest > volumeThreshold) {
+//         userVolumeRequest = volumeThreshold;
+//         setVolume();
+//     }
 // }
