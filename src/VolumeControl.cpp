@@ -9,7 +9,7 @@ void VolumeControl::setVolume() {
     tooLoud = (effectiveVolume > volumeThreshold);
 }
 
-void VolumeControl::saturateVolume() {
-    userVolumeRequest = volumeThreshold;
-    setVolume();
-}
+// void VolumeControl::saturateVolume() {
+//     userVolumeRequest = volumeThreshold;
+//     setVolume();
+// }
