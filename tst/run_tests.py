@@ -2,11 +2,12 @@ import os
 import sys
 from datetime import datetime
 
-import junit_testresults
+import junit_testresults as result_exporter
 from btc_embedded import EPRestApi, util
 
 work_dir = os.path.dirname(sys.argv[0])
 epp_file = os.path.join(work_dir, 'InfotainmentSystem.epp')
+report_dir = os.path.abspath('reports')
 
 # BTC EmbeddedPlatform API object
 ep = EPRestApi(version='24.3p0')
@@ -29,7 +30,7 @@ exec_start_time = datetime.now()
 response = ep.post('scopes/test-execution-rbt', rbt_exec_payload, message="Running requirements-based tests")
 test_cases = ep.get('test-cases-rbt')
 exec_end_time = datetime.now()
-junit_testresults.dump_testresults_mochajson(os.path.join(work_dir, 'test-results.json'), response, exec_start_time, exec_end_time, test_cases)
+result_exporter.dump_testresults_mochajson(os.path.join(epp_file[:-4],'.json'), response, exec_start_time, exec_end_time, test_cases)
 
 rbt_coverage = rbt_coverage = ep.get(f"scopes/{toplevel_scope_uid}/coverage-results-rbt")
 util.print_rbt_results(response, rbt_coverage)
@@ -37,11 +38,11 @@ util.print_rbt_results(response, rbt_coverage)
 # Create project report
 report = ep.post(f"scopes/{toplevel_scope_uid}/project-report", message="Creating test report")
 # export project report to a file called 'report.html'
-ep.post(f"reports/{report['uid']}", { 'exportPath': work_dir, 'newName': 'report' })
+ep.post(f"reports/{report['uid']}", { 'exportPath': report_dir, 'newName': 'report' })
 
 # Save *.epp
 ep.put('profiles', { 'path': epp_file }, message="Saving test project")
 
-print(f'Finished:\n - Report: report.html \n - Test Project: {os.path.basename(epp_file)}')
+print(f'Finished')
 
     

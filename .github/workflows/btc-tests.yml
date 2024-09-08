@@ -25,14 +25,46 @@ jobs:
       run: |
         python tst/run_tests.py
 
+    - name: Publish test results to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: reports
+            
     - name: Publish results
       uses: dorny/test-reporter@v1
       if: success() || failure()
       with:
-        name: BTC Tests
-        path: tst/test-results.json
+        name: Test results
+        path: tst/*.json
         reporter: mocha-json
         only-summary: 'false'
-        use-actions-summary: 'true'
-        # Set action as failed if test report contains any failed test
-        fail-on-error: 'false'
+
+    # - name: Add summary to PR
+    #   uses: actions/github-script@v6
+    #   with:
+    #     script: |
+    #         const summary = `
+    #         ## Checks Summary
+
+    #         - **Test Passed**: 25
+    #         - **Test Failed**: 2
+
+    #         ### Details:
+
+    #         1. Test 1 failed due to timeout.
+    #         2. Test 2 failed due to incorrect output.
+
+    #         [View full report](https://example.com)
+    #         `
+    #         github.rest.checks.update({
+    #             owner: context.repo.owner,
+    #             repo: context.repo.repo,
+    #             check_run_id: context.runId,
+    #             output: {
+    #             title: "Checks Summary",
+    #             summary: summary,
+    #             text: "Additional details about the checks."
+    #             }
+    #         })
+      
