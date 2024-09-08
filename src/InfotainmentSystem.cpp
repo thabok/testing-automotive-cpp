@@ -20,9 +20,9 @@ void InfotainmentSystem::stepFunction() {
         if (!BluetoothConnector::isBluetoothConnected) {
             BluetoothConnector::connectDevice();
         }
-        // if (VolumeControl::tooLoud) {
-        //     VolumeControl::saturateVolume();
-        // }
+        if (VolumeControl::tooLoud) {
+            VolumeControl::saturateVolume();
+        }
     } else if (BluetoothConnector::isBluetoothConnected) {
         // disconnect bluetooth device if no connection is pending and a connection is active
         BluetoothConnector::disconnectDevice();
