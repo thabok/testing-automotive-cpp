@@ -5,7 +5,7 @@ from datetime import datetime
 import junit_testresults
 from btc_embedded import EPRestApi, util
 
-work_dir = os.path.dirname(sys.argv[0])
+work_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
 epp_file = os.path.join(work_dir, 'InfotainmentSystem.epp')
 report_dir = os.path.abspath('reports')
 
@@ -44,5 +44,3 @@ ep.post(f"reports/{report['uid']}", { 'exportPath': report_dir, 'newName': 'repo
 ep.put('profiles', { 'path': epp_file }, message="Saving test project")
 
 print(f'Finished')
-
-    
