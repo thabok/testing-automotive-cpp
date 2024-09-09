@@ -26,6 +26,7 @@ void InfotainmentSystem::stepFunction() {
     } else if (BluetoothConnector::isBluetoothConnected) {
         // disconnect bluetooth device if no connection is pending and a connection is active
         BluetoothConnector::disconnectDevice();
+        updateSystemState(BLUETOOTH_OFF);
     }
 
     // adapt system status
