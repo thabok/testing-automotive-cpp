@@ -1,0 +1,33 @@
+{
+  "version":"1.0",
+  "configuration":{
+    "signals":{
+      "inputs":[ {
+        "name":"connectionRequestId",
+        "visible":false
+      }, {
+        "name":"requestedRouteLength",
+        "visible":false
+      }, {
+        "name":"stopRequested",
+        "visible":false
+      } ],
+      "outputs":[ {
+        "name":"isBluetoothConnected",
+        "visible":false
+      }, {
+        "name":"currentRouteLength",
+        "visible":false
+      }, {
+        "name":"isNavigationActive",
+        "visible":false
+      }, {
+        "name":"systemStateBitfield",
+        "visible":false
+      }, {
+        "name":"connectedDeviceId",
+        "visible":false
+      } ]
+    }
+  }
+}

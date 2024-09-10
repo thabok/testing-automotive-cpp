@@ -1,0 +1,45 @@
+{
+  "version":"1.1",
+  "metaData":{
+    "name":"DeviceConnected",
+    "scopePath":"accessor.cpp:1:stepFunction",
+    "architecture":"stepFunction [C-Code]",
+    "length":"2",
+    "type":"Non-initial",
+    "isPartial":"true"
+  },
+  "vectorContent":{
+    "steps":[ {
+      "step":{
+        "number":"0",
+        "inputs":[ {
+          "connectionRequestId":"0.0"
+        } ],
+        "outputs":[ {
+          "isBluetoothConnected":"0"
+        }, {
+          "connectedDeviceId":"#NO_DEVICE_ID"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"1",
+        "inputs":[ {
+          "connectionRequestId":"1337"
+        } ],
+        "outputs":[ {
+          "isBluetoothConnected":"1"
+        }, {
+          "connectedDeviceId":"af(connectionRequestId, 1)"
+        } ]
+      }
+    } ]
+  },
+  "interface":{
+    "inputs":[ "connectionRequestId" ],
+    "outputs":[ "isBluetoothConnected", "connectedDeviceId" ]
+  },
+  "constants":{
+    "NO_DEVICE_ID":"-1"
+  }
+}

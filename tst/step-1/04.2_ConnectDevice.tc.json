@@ -1,0 +1,39 @@
+{
+  "version":"1.1",
+  "metaData":{
+    "name":"04.2_ConnectDevice",
+    "scopePath":"accessor.cpp:1:stepFunction",
+    "architecture":"stepFunction [C-Code]",
+    "description":"- check behavior with no request\r\n- activate connection request\r\n- verify correct response",
+    "length":"2"
+  },
+  "vectorContent":{
+    "steps":[ {
+      "step":{
+        "number":"0",
+        "comment":"no active connection request",
+        "usedTestMacros":[ {
+          "uuid":"31tk",
+          "name":"DeviceConnected",
+          "endStep":1,
+          "isPartial":true,
+          "type":"Non-initial"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"1",
+        "comment":"active con. request -> connect device"
+      }
+    } ]
+  },
+  "requirements":[ "subterra:data-service:objects:/default/infotainment${WorkItem}INFO-91", "subterra:data-service:objects:/default/infotainment${WorkItem}INFO-90" ],
+  "interface":{
+    "inputs":[ "userVolumeRequest", "stopRequested", "requestedRouteLength", "connectionRequestId" ],
+    "parameters":[ "volumeThreshold" ],
+    "outputs":[ "systemStateBitfield", "effectiveVolume", "tooLoud", "isNavigationActive", "currentRouteLength", "isBluetoothConnected", "connectedDeviceId" ]
+  },
+  "constants":{
+    "NO_DEVICE_ID":"-1"
+  }
+}

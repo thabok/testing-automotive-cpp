@@ -1,0 +1,85 @@
+{
+  "version":"1.1",
+  "metaData":{
+    "name":"02.1_ApplyRequestedVolume",
+    "scopePath":"accessor.cpp:1:stepFunction",
+    "architecture":"stepFunction [C-Code]",
+    "description":"If the requested volume is out of the [0,100] range the value shall be ignored (not saturated).\r\nTesting with different values, explicitly:\r\n- a valid value != 100 followed by invalid value > 100\r\n- a valid value != 0 followed by invalid value < 0",
+    "length":"6"
+  },
+  "vectorContent":{
+    "steps":[ {
+      "step":{
+        "number":"0",
+        "comment":"valid value -> expect 5",
+        "inputs":[ {
+          "userVolumeRequest":"5"
+        } ],
+        "outputs":[ {
+          "effectiveVolume":"5"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"1",
+        "comment":"invalid value -> expect effective volume to remain 5",
+        "inputs":[ {
+          "userVolumeRequest":"-50"
+        } ],
+        "outputs":[ {
+          "effectiveVolume":"5"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"2",
+        "comment":"valid value -> expect 50",
+        "inputs":[ {
+          "userVolumeRequest":"50"
+        } ],
+        "outputs":[ {
+          "effectiveVolume":"50"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"3",
+        "comment":"valid value -> expect 100",
+        "inputs":[ {
+          "userVolumeRequest":"100"
+        } ],
+        "outputs":[ {
+          "effectiveVolume":"100"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"4",
+        "comment":"valid value -> expect 80",
+        "inputs":[ {
+          "userVolumeRequest":"80"
+        } ],
+        "outputs":[ {
+          "effectiveVolume":"80"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"5",
+        "comment":"invalid value -> expect effective volume to remain 80",
+        "inputs":[ {
+          "userVolumeRequest":"150"
+        } ],
+        "outputs":[ {
+          "effectiveVolume":"80"
+        } ]
+      }
+    } ]
+  },
+  "requirements":[ "subterra:data-service:objects:/default/infotainment${WorkItem}INFO-86" ],
+  "interface":{
+    "inputs":[ "userVolumeRequest", "stopRequested", "requestedRouteLength", "connectionRequestId" ],
+    "parameters":[ "volumeThreshold" ],
+    "outputs":[ "systemStateBitfield", "effectiveVolume", "tooLoud", "isNavigationActive", "currentRouteLength", "isBluetoothConnected", "connectedDeviceId" ]
+  }
+}

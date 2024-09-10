@@ -1,0 +1,52 @@
+{
+  "version":"1.1",
+  "metaData":{
+    "name":"04.3_DisconnectDevice",
+    "scopePath":"accessor.cpp:1:stepFunction",
+    "architecture":"stepFunction [C-Code]",
+    "description":"- check behavior with no request\r\n- connect device and verify response\r\n- disconnect device and verify response\r\n\r\n(uses #DeviceConnected test macro)",
+    "length":"3"
+  },
+  "vectorContent":{
+    "steps":[ {
+      "step":{
+        "number":"0",
+        "comment":"no active connection request",
+        "usedTestMacros":[ {
+          "uuid":"31tk",
+          "name":"DeviceConnected",
+          "endStep":1,
+          "isPartial":true,
+          "type":"Non-initial"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"1",
+        "comment":"active con. request -> connect device"
+      }
+    }, {
+      "step":{
+        "number":"2",
+        "comment":"disconnect device",
+        "inputs":[ {
+          "connectionRequestId":"0"
+        } ],
+        "outputs":[ {
+          "isBluetoothConnected":"0"
+        }, {
+          "connectedDeviceId":"#NO_DEVICE_ID"
+        } ]
+      }
+    } ]
+  },
+  "requirements":[ "subterra:data-service:objects:/default/infotainment${WorkItem}INFO-92" ],
+  "interface":{
+    "inputs":[ "userVolumeRequest", "stopRequested", "requestedRouteLength", "connectionRequestId" ],
+    "parameters":[ "volumeThreshold" ],
+    "outputs":[ "systemStateBitfield", "effectiveVolume", "tooLoud", "isNavigationActive", "currentRouteLength", "isBluetoothConnected", "connectedDeviceId" ]
+  },
+  "constants":{
+    "NO_DEVICE_ID":"-1"
+  }
+}

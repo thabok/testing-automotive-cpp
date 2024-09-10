@@ -1,0 +1,55 @@
+{
+  "version":"1.1",
+  "metaData":{
+    "name":"01.1_HighVolumeStopNavigation",
+    "scopePath":"accessor.cpp:1:stepFunction",
+    "architecture":"stepFunction [C-Code]",
+    "description":"Activates the navigation and constantly increases the volume. Checks if the navigation stops as expected once the volume threshold has been exceeded.",
+    "length":"101"
+  },
+  "vectorContent":{
+    "steps":[ {
+      "step":{
+        "number":"0",
+        "inputs":[ {
+          "userVolumeRequest":"sg(Ramp, 101, C-Code, true, true, m=1, Starting value=0, End value=100)"
+        }, {
+          "requestedRouteLength":"100.53"
+        } ],
+        "parameters":[ {
+          "volumeThreshold":"75"
+        } ],
+        "outputs":[ {
+          "isNavigationActive":"sg(Constant, 76, C-Code, true, true, C=1)"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"75",
+        "outputs":[ {
+          "tooLoud":"0"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"76",
+        "comment":"volume exceeds threshold: navigation should stop",
+        "outputs":[ {
+          "tooLoud":"1"
+        }, {
+          "isNavigationActive":"0"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"100"
+      }
+    } ]
+  },
+  "requirements":[ "subterra:data-service:objects:/default/infotainment${WorkItem}INFO-83" ],
+  "interface":{
+    "inputs":[ "userVolumeRequest", "stopRequested", "requestedRouteLength", "connectionRequestId" ],
+    "parameters":[ "volumeThreshold" ],
+    "outputs":[ "systemStateBitfield", "effectiveVolume", "tooLoud", "isNavigationActive", "currentRouteLength", "isBluetoothConnected", "connectedDeviceId" ]
+  }
+}

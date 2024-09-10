@@ -1,0 +1,56 @@
+{
+  "version":"1.1",
+  "metaData":{
+    "name":"03.1_StartNavigation",
+    "scopePath":"accessor.cpp:1:stepFunction",
+    "architecture":"stepFunction [C-Code]",
+    "description":"Passing invalid and valid values to the navigation system, expecting only valid values (above 0) to be accepted.",
+    "length":"4"
+  },
+  "vectorContent":{
+    "steps":[ {
+      "step":{
+        "number":"0",
+        "comment":"invalid route length -> ignore",
+        "inputs":[ {
+          "requestedRouteLength":"-5"
+        } ],
+        "outputs":[ {
+          "isNavigationActive":"af(requestedRouteLength > 0, 4)"
+        }, {
+          "currentRouteLength":"af((requestedRouteLength > 0 ? requestedRouteLength : 0), 4)"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"1",
+        "comment":"...",
+        "inputs":[ {
+          "requestedRouteLength":"0"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"2",
+        "comment":"valid",
+        "inputs":[ {
+          "requestedRouteLength":"1"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"3",
+        "comment":"...",
+        "inputs":[ {
+          "requestedRouteLength":"10000"
+        } ]
+      }
+    } ]
+  },
+  "requirements":[ "subterra:data-service:objects:/default/infotainment${WorkItem}INFO-88" ],
+  "interface":{
+    "inputs":[ "userVolumeRequest", "stopRequested", "requestedRouteLength", "connectionRequestId" ],
+    "parameters":[ "volumeThreshold" ],
+    "outputs":[ "systemStateBitfield", "effectiveVolume", "tooLoud", "isNavigationActive", "currentRouteLength", "isBluetoothConnected", "connectedDeviceId" ]
+  }
+}

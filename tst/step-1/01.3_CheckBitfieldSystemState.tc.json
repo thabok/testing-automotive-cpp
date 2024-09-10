@@ -1,0 +1,95 @@
+{
+  "version":"1.1",
+  "metaData":{
+    "name":"01.3_CheckBitfieldSystemState",
+    "scopePath":"accessor.cpp:1:stepFunction/SystemStateReporter.c:1:updateSystemState",
+    "architecture":"stepFunction [C-Code]",
+    "description":"The system state is encoded as a bitfield with the lower bit encoding the Navigation status and the higher bit encoding the Bluetooth status:\r\n\r\n00 -> Bluetooth and Navigation OFF\r\n01 -> Bluetooth OFF, Navigation ON\r\n10 -> Bluetooth ON, Naviation OFF\r\n11 -> Bluetooth and Navigation ON\r\n\r\nHence, the integer value of the bitfield can vary depending on the order of commands but the bitfields shall always indicate their respective encoded status:\r\nx0 -> Navigation OFF (could be integers 0 or 2)\r\nx1 -> Navigation ON (could be integers 1 or 3)\r\n0x -> Bluetooth OFF (could be integers 0 or 1)\r\n1x -> Bluetooth ON (could be integers 2 or 3)",
+    "length":"7"
+  },
+  "vectorContent":{
+    "steps":[ {
+      "step":{
+        "number":"0",
+        "comment":"navigation uses bit zero (1<<0 = 1): expect \"x1\"",
+        "inputs":[ {
+          "state":"1"
+        } ],
+        "outputs":[ {
+          "systemStateBitfield":"lvf((systemStateBitfield & 1) != 0, 1)"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"1",
+        "comment":"expect \"x0\"",
+        "inputs":[ {
+          "state":"0"
+        } ],
+        "outputs":[ {
+          "systemStateBitfield":"lvf((systemStateBitfield & 1) == 0, 1)"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"2",
+        "comment":"bluetooth uses bit one (1<<1 = 2): expect \"1x\"",
+        "inputs":[ {
+          "state":"3"
+        } ],
+        "outputs":[ {
+          "systemStateBitfield":"lvf((systemStateBitfield & 2) != 0, 1)"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"3",
+        "comment":"expect \"0x\"",
+        "inputs":[ {
+          "state":"2"
+        } ],
+        "outputs":[ {
+          "systemStateBitfield":"lvf((systemStateBitfield & 2) == 0, 1)"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"4",
+        "comment":"different order of commands causes different integer values, bits shall still be valid: expect \"x1\"",
+        "inputs":[ {
+          "state":"1"
+        } ],
+        "outputs":[ {
+          "systemStateBitfield":"lvf((systemStateBitfield & 1) != 0, 1)"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"5",
+        "comment":"expect \"1x\"",
+        "inputs":[ {
+          "state":"3"
+        } ],
+        "outputs":[ {
+          "systemStateBitfield":"lvf((systemStateBitfield & 2) != 0, 1)"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"6",
+        "comment":"expect \"x0\"",
+        "inputs":[ {
+          "state":"0"
+        } ],
+        "outputs":[ {
+          "systemStateBitfield":"lvf((systemStateBitfield & 1) == 0, 1)"
+        } ]
+      }
+    } ]
+  },
+  "requirements":[ "subterra:data-service:objects:/default/infotainment${WorkItem}INFO-85" ],
+  "interface":{
+    "inputs":[ "state" ],
+    "outputs":[ "systemStateBitfield" ]
+  }
+}

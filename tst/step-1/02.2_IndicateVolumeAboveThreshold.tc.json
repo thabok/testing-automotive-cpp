@@ -1,0 +1,68 @@
+{
+  "version":"1.1",
+  "metaData":{
+    "name":"02.2_IndicateVolumeAboveThreshold",
+    "scopePath":"accessor.cpp:1:stepFunction",
+    "architecture":"stepFunction [C-Code]",
+    "description":"test with value below, equal to and above threshold",
+    "length":"4"
+  },
+  "vectorContent":{
+    "steps":[ {
+      "step":{
+        "number":"0",
+        "comment":"not too loud",
+        "inputs":[ {
+          "userVolumeRequest":"50"
+        } ],
+        "parameters":[ {
+          "volumeThreshold":"75"
+        } ],
+        "outputs":[ {
+          "effectiveVolume":"af(userVolumeRequest, 4)"
+        }, {
+          "tooLoud":"0"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"1",
+        "comment":"equal to threshold -> not too loud",
+        "inputs":[ {
+          "userVolumeRequest":"75"
+        } ],
+        "outputs":[ {
+          "tooLoud":"0"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"2",
+        "comment":"too loud",
+        "inputs":[ {
+          "userVolumeRequest":"76"
+        } ],
+        "outputs":[ {
+          "tooLoud":"1"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"3",
+        "comment":"too loud",
+        "inputs":[ {
+          "userVolumeRequest":"80"
+        } ],
+        "outputs":[ {
+          "tooLoud":"1"
+        } ]
+      }
+    } ]
+  },
+  "requirements":[ "subterra:data-service:objects:/default/infotainment${WorkItem}INFO-87" ],
+  "interface":{
+    "inputs":[ "userVolumeRequest", "stopRequested", "requestedRouteLength", "connectionRequestId" ],
+    "parameters":[ "volumeThreshold" ],
+    "outputs":[ "systemStateBitfield", "effectiveVolume", "tooLoud", "isNavigationActive", "currentRouteLength", "isBluetoothConnected", "connectedDeviceId" ]
+  }
+}

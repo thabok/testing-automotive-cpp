@@ -1,0 +1,37 @@
+{
+  "version":"1.0",
+  "configuration":{
+    "signals":{
+      "inputs":[ {
+        "name":"connectionRequestId",
+        "visible":false
+      }, {
+        "name":"stopRequested",
+        "visible":false
+      }, {
+        "name":"userVolumeRequest",
+        "visible":false
+      } ],
+      "parameters":[ {
+        "name":"volumeThreshold",
+        "visible":false
+      } ],
+      "outputs":[ {
+        "name":"isBluetoothConnected",
+        "visible":false
+      }, {
+        "name":"effectiveVolume",
+        "visible":false
+      }, {
+        "name":"systemStateBitfield",
+        "visible":false
+      }, {
+        "name":"tooLoud",
+        "visible":false
+      }, {
+        "name":"connectedDeviceId",
+        "visible":false
+      } ]
+    }
+  }
+}

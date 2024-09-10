@@ -1,0 +1,45 @@
+{
+  "version":"1.1",
+  "metaData":{
+    "name":"03.2_StopNavigation",
+    "scopePath":"accessor.cpp:1:stepFunction",
+    "architecture":"stepFunction [C-Code]",
+    "description":"Start and then stop navigation. Check status & route lenght reset.",
+    "length":"2"
+  },
+  "vectorContent":{
+    "steps":[ {
+      "step":{
+        "number":"0",
+        "comment":"start navigation",
+        "inputs":[ {
+          "requestedRouteLength":"1337"
+        } ],
+        "outputs":[ {
+          "isNavigationActive":"1"
+        }, {
+          "currentRouteLength":"af(requestedRouteLength, 2)"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"1",
+        "comment":"stop and expect active flag + currentRouteLength reset",
+        "inputs":[ {
+          "stopRequested":"1"
+        }, {
+          "requestedRouteLength":"0"
+        } ],
+        "outputs":[ {
+          "isNavigationActive":"0"
+        } ]
+      }
+    } ]
+  },
+  "requirements":[ "subterra:data-service:objects:/default/infotainment${WorkItem}INFO-89" ],
+  "interface":{
+    "inputs":[ "userVolumeRequest", "stopRequested", "requestedRouteLength", "connectionRequestId" ],
+    "parameters":[ "volumeThreshold" ],
+    "outputs":[ "systemStateBitfield", "effectiveVolume", "tooLoud", "isNavigationActive", "currentRouteLength", "isBluetoothConnected", "connectedDeviceId" ]
+  }
+}
