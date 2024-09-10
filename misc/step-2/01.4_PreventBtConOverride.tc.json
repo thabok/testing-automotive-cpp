@@ -1,0 +1,65 @@
+{
+  "version":"1.1",
+  "metaData":{
+    "name":"01.4_PreventBtConOverride",
+    "scopePath":"accessor.cpp:1:stepFunction",
+    "architecture":"stepFunction [C-Code]",
+    "description":"- connects a device with id 1337\r\n- tries to connect a device with id 1338\r\n- expects error flag to become active",
+    "length":"3"
+  },
+  "vectorContent":{
+    "steps":[ {
+      "step":{
+        "number":"0",
+        "comment":"nothing connected",
+        "outputs":[ {
+          "isBluetoothConnected":"0"
+        }, {
+          "connectedDeviceId":"#NO_DEVICE_ID"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"1",
+        "comment":"connect device 1337",
+        "inputs":[ {
+          "connectionRequestId":"1337"
+        } ],
+        "locals":[ {
+          "errorFlag":"0"
+        } ],
+        "outputs":[ {
+          "isBluetoothConnected":"1"
+        }, {
+          "connectedDeviceId":"1337"
+        } ]
+      }
+    }, {
+      "step":{
+        "number":"2",
+        "comment":"connect device 1338 while 1337 is still connected: expect 1337 to remain active and error flag to become active",
+        "inputs":[ {
+          "connectionRequestId":"1338"
+        } ],
+        "locals":[ {
+          "errorFlag":"1"
+        } ],
+        "outputs":[ {
+          "isBluetoothConnected":"1"
+        }, {
+          "connectedDeviceId":"1337"
+        } ]
+      }
+    } ]
+  },
+  "requirements":[ "subterra:data-service:objects:/default/infotainment${WorkItem}INFO-97" ],
+  "interface":{
+    "inputs":[ "userVolumeRequest", "stopRequested", "requestedRouteLength", "connectionRequestId" ],
+    "parameters":[ "volumeThreshold" ],
+    "locals":[ "errorFlag" ],
+    "outputs":[ "systemStateBitfield", "effectiveVolume", "tooLoud", "isNavigationActive", "currentRouteLength", "isBluetoothConnected", "connectedDeviceId" ]
+  },
+  "constants":{
+    "NO_DEVICE_ID":"-1"
+  }
+}

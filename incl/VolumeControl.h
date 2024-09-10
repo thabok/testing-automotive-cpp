@@ -11,7 +11,15 @@ public:
     bool tooLoud;
 
     VolumeControl();
+
+    /**
+     * @brief Sets the volume based on the userVolumeRequest
+     */
     void setVolume();
+
+    /**
+     * @brief Saturates the volume to not be higher as the configured volumeThreshold
+     */
     void saturateVolume();
 };
 

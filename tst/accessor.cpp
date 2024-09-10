@@ -14,6 +14,7 @@ namespace BTC {
 		InfotainmentSystem sut;
 
 		// public object attributes
+		bool errorFlag;
 		Volume userVolumeRequest;
 		Volume effectiveVolume;
 		Volume volumeThreshold;
@@ -38,6 +39,7 @@ namespace BTC {
 			sut.stepFunction();
 
 			// Output interface
+			errorFlag = sut.errorFlag;
 			effectiveVolume = sut.effectiveVolume;
 			tooLoud = sut.tooLoud;
 			isNavigationActive = sut.isNavigationActive;

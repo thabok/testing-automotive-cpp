@@ -11,6 +11,7 @@ public:
     DistanceKM requestedRouteLength;
 
     NavigationSystem();
+
     void startNavigation();
     void stopNavigation();
 };

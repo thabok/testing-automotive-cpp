@@ -1,6 +1,8 @@
 #ifndef BLUETOOTH_CONNECTOR_H
 #define BLUETOOTH_CONNECTOR_H
 
+#include <exception>
+
 typedef int Identifier;
 #define NO_DEVICE_ID -1
 
