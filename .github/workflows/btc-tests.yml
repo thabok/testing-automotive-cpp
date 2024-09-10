@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   pull_request:
   push:
-    branches:
-      - main
 
 permissions:
   contents: write
@@ -17,7 +15,7 @@ jobs:
     name: Test execution
     runs-on: self-hosted
     if: ${{
-        (github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '#ci')) ||
+        contains(github.event.head_commit.message, '#ci') ||
         github.event_name == 'workflow_dispatch'  ||
         github.event_name == 'pull_request'
         }}
