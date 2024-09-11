@@ -9,7 +9,7 @@ void InfotainmentSystem::stepFunction() {
     // Activate Navigation
     NavigationSystem::startNavigation();
 
-    // Driver pamic mode: if music is too loud -> stop navigation
+    // Driver panic mode: if music is too loud -> stop navigation
     if (VolumeControl::tooLoud || NavigationSystem::stopRequested) {
         NavigationSystem::stopNavigation();
     }
