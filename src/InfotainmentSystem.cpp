@@ -17,17 +17,15 @@ void InfotainmentSystem::stepFunction() {
     // Bluetooth connection
     if (BluetoothConnector::connectionRequestActive()) {
         // connect bluetooth device if connection is pending
-        BluetoothConnector::connectDevice();
-        
-        // try {
-        //     BluetoothConnector::connectDevice();
-        // } catch (const std::exception& e) {
-        //     InfotainmentSystem::errorFlag = true;
-        // }
+        try {
+            BluetoothConnector::connectDevice();
+        } catch (const std::exception& e) {
+            InfotainmentSystem::errorFlag = true;
+        }
 
-        // if (VolumeControl::tooLoud) {
-        //     VolumeControl::saturateVolume();
-        // }
+        if (VolumeControl::tooLoud) {
+            VolumeControl::saturateVolume();
+        }
     } else if (BluetoothConnector::isBluetoothConnected) {
         // disconnect bluetooth device if no connection is pending and a connection is active
         BluetoothConnector::disconnectDevice();
