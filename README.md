@@ -28,6 +28,7 @@ The requirements are stored in Polarion and directly imported into the test case
 | 01.1 - High volume shall stop navigation | A volume above the defined threshold shall disable the navigation. | 
 | 01.2 - Saturate volume on bluetooth connect | When the bluetooth connector accepts an active connection request, the volume shall be saturated to the volume threshold value to prevent sudden driver distraction. | 
 | 01.3 - System State | The system state bitfield shall reflected the status of the navigation system and bluetooth system | 
+| 01.4 - Prevent override of active bluetooth connection | When the Bluetooth connector has an active connection and the Infotainment System tries to connect another device, the Bluetooth Connector will throw an Exception. This shall cause the Infotainment System's global error flag to become active. |
 | 02 - VolumeControl |  | 
 | 02.1 - Apply requested volume | Setting the volume shall apply the user request if it is in the expected range [0,100] | 
 | 02.2 - Indicate volume above threshold | If the effective volume is higher than the defined volume threshold, the tooLoud flag shall be enabled (and disabled when it's <= the threshold). | 
