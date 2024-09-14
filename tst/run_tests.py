@@ -6,6 +6,7 @@ from btc_embedded import EPRestApi, util
 
 work_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
 epp_file = os.path.join(work_dir, 'InfotainmentSystem.epp')
+project_name = os.path.basename(epp_file)[:-4]
 report_dir = os.path.abspath('reports')
 
 # BTC EmbeddedPlatform API object
@@ -28,8 +29,15 @@ rbt_exec_payload = {
 exec_start_time = datetime.now()
 response = ep.post('scopes/test-execution-rbt', rbt_exec_payload, message="Running requirements-based tests")
 test_cases = ep.get('test-cases-rbt')
-exec_end_time = datetime.now()
-util.dump_testresults_mochajson(epp_file[:-4] + '.json', response, exec_start_time, exec_end_time, test_cases)
+# Dump JUnit XML report
+util.dump_testresults_junitxml(
+    rbt_results=response,
+    scopes=scopes,
+    test_cases=test_cases,
+    start_time=exec_start_time,
+    project_name=project_name,
+    output_file=os.path.join(work_dir, 'test_results.xml')
+)
 
 rbt_coverage = rbt_coverage = ep.get(f"scopes/{toplevel_scope_uid}/coverage-results-rbt")
 util.print_rbt_results(response, rbt_coverage)

@@ -42,6 +42,6 @@ jobs:
       if: success() || failure()
       with:
         name: Test results
-        path: tst/*.json
-        reporter: mocha-json
+        path: tst/test-results.xml
+        reporter: jest-junit
         only-summary: 'false'
