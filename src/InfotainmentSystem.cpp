@@ -1,6 +1,6 @@
 #include "InfotainmentSystem.h"
 
-InfotainmentSystem::InfotainmentSystem() : VolumeControl(), NavigationSystem(), BluetoothConnector() {}
+InfotainmentSystem::InfotainmentSystem() : VolumeControl(), NavigationSystem(), BluetoothConnector(), DriverAssistance(), EmergencyCallSystem() {}
 
 void InfotainmentSystem::stepFunction() {
     // Adjust volume
@@ -16,7 +16,6 @@ void InfotainmentSystem::stepFunction() {
 
     // Bluetooth connection
     if (BluetoothConnector::connectionRequestActive()) {
-        // connect bluetooth device if connection is pending
         try {
             BluetoothConnector::connectDevice();
         } catch (const std::exception& e) {
@@ -27,11 +26,25 @@ void InfotainmentSystem::stepFunction() {
             VolumeControl::saturateVolume();
         }
     } else if (BluetoothConnector::isBluetoothConnected) {
-        // disconnect bluetooth device if no connection is pending and a connection is active
         BluetoothConnector::disconnectDevice();
     }
 
-    // adapt system status
+    // Driver assistance checks
+    float currentSpeed = /* get current speed */;
+    float distanceToObstacle = /* get distance to obstacle */;
+    float carPosition = /* get car position */;
+    float leftLaneBoundary = /* get left lane boundary */;
+    float rightLaneBoundary = /* get right lane boundary */;
+    
+    DriverAssistance::checkLaneDeparture(carPosition, leftLaneBoundary, rightLaneBoundary);
+    DriverAssistance::checkCollision(currentSpeed, distanceToObstacle);
+    DriverAssistance::checkSpeedLimit(currentSpeed);
+
+    // Emergency call system
+    EmergencyCallSystem::detectAccident(DriverAssistance::collisionAlert);
+    EmergencyCallSystem::callEmergencyServices();
+
+    // Adapt system status
     SystemState btState = BluetoothConnector::isBluetoothConnected ? BLUETOOTH_ON : BLUETOOTH_OFF;
     SystemState navState = NavigationSystem::isNavigationActive ? NAVIGATION_ON : NAVIGATION_OFF;
     updateSystemState(btState);
